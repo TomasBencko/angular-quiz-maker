@@ -1,0 +1,6 @@
+
+<p [innerHTML]="questionData.question" ></p>
+
+<div class="question-answers">
+  <button *ngFor="let option of options" [innerHTML]="option"></button>
+</div>

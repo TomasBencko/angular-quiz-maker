@@ -1,1 +1,8 @@
-<p>quiz-page works!</p>
+<h1>Quiz maker</h1>
+
+<app-quiz-selection></app-quiz-selection>
+
+<app-question-list
+  *ngIf="quizData$ | async"
+  [quizData$]="quizData$"
+></app-question-list>

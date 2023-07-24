@@ -1,0 +1,33 @@
+
+<form [formGroup]="quizSelectionForm"
+  (ngSubmit)="onSubmit()"
+>
+
+  <select formControlName="triviaCategory"
+    id="categorySelect"
+  >
+    <option value="">Select a category</option>
+
+    <option *ngFor="let option of triviaCategoryOptions$ | async"
+      [value]="option.id"
+    >{{ option.name }}</option>
+  </select>
+
+  <select formControlName="difficultyLevel"
+    id="difficultySelect"
+  >
+    <option value="">Select difficulty</option>
+    <option value="easy">Easy</option>
+    <option value="medium">Medium</option>
+    <option value="hard">Hard</option>
+  </select>
+
+  <button type="submit"
+    [disabled]="!quizSelectionForm.valid"
+    id="createBtn"
+  >Create</button>
+
+</form>
+
+<!-- <br /> -->
+<!-- <p>{{ triviaCategoryOptions$ | async | json }}</p> -->

@@ -1,0 +1,27 @@
+
+p {
+  margin-bottom: var(--paddings);
+}
+
+.question-answers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--paddings);
+  margin-bottom: calc(var(--paddings) * 2);
+
+  button {
+    cursor: pointer;
+    padding: var(--paddings);
+    border: 1px solid green;
+    border-radius: var(--radius);
+    background: none;
+
+    color: green;
+    white-space: nowrap;
+
+    &:hover, &.selected {
+      background: green;
+      color: white;
+    }
+  }
+}
