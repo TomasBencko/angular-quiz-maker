@@ -55,7 +55,8 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "/angular-quiz-maker/"
             },
             "development": {
               "buildOptimizer": false,
