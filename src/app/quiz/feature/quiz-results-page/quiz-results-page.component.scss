@@ -1,0 +1,10 @@
+
+.score {
+  margin-bottom: calc(var(--paddings) * 2);
+  text-align: center;
+  width: 60%;
+  margin-right: auto;
+  margin-left: auto;
+  padding: var(--paddings) 0;
+  border-radius: var(--radius);
+}

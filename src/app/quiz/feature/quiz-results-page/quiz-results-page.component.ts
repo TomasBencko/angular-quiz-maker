@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { QuizService } from '@/quiz/services/quiz.service';
 import { QuestionListComponent } from '@/quiz/ui/question-list/question-list.component';
 import { TriviaQuestion } from '@/quiz/models/quiz.interface';
 import { ButtonWideComponent } from '@/quiz/ui/button-wide/button-wide.component';
 import { Router } from '@angular/router';
+import { ScoreColorDirective } from '@/quiz/utils/score-color.directive';
 
 @Component({
   selector: 'app-quiz-results-page',
   standalone: true,
-  imports: [CommonModule, QuestionListComponent, ButtonWideComponent],
+  imports: [CommonModule, QuestionListComponent, ButtonWideComponent, ScoreColorDirective],
   templateUrl: './quiz-results-page.component.html',
   styleUrls: ['./quiz-results-page.component.scss']
 })
@@ -23,6 +25,27 @@ export class QuizResultsPageComponent {
   ) {}
 
   quizData$: Observable<TriviaQuestion[] | null> = this.quizService.quizData$;
+
+  correctAnswers$: Observable<number | null> = this.quizData$.pipe(
+    map(data => data
+      ? data.reduce((acc, question) => question.selectedAnswer === question.correctAnswer ? ++acc : acc, 0)
+      : null
+    )
+  )
+
+  numberOfQuestions$: Observable<number | null> = this.quizData$.pipe(
+    map(data => data ? data.length : null )
+  )
+
+  successRate$: Observable<number | null> = combineLatest(
+    [this.correctAnswers$, this.numberOfQuestions$]
+  ).pipe(
+    map((([correctAnswers, numberOfQuestions]: any[]) => { // TODO:
+      console.log(`correctAnswers / numberOfQuestions`)
+      console.log(correctAnswers / numberOfQuestions)
+      return correctAnswers / numberOfQuestions
+    }))
+  )
 
   onNewButtonClicked() {
     this.quizService.emptyQuizData();

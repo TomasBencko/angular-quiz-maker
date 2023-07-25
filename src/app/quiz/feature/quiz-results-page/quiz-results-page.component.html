@@ -4,6 +4,15 @@
   [quizData$]="quizData$" [quizCompleted]="true"
 ></app-question-list>
 
+<p *ngIf="quizData$ | async; else noScore" class="score"
+  [appScoreColor]="successRate$ | async"
+>You scored {{ correctAnswers$ | async }} out of {{ numberOfQuestions$ | async }}</p>
+
+<ng-template #noScore>
+  <p class="score">No score to show</p>
+</ng-template>
+
+
 <app-button-wide
   (buttonClicked)="onNewButtonClicked()"
 >Create a new quiz</app-button-wide>
