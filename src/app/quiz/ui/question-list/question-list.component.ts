@@ -13,6 +13,7 @@ import { QuestionAnswer } from '@/quiz/models/quiz.interface';
 export class QuestionListComponent {
 
   @Input() quizData$: any = null;
+  @Input() quizCompleted? = false;
 
   @Output() questionAnswered = new EventEmitter<QuestionAnswer>();
 

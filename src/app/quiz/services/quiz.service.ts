@@ -15,6 +15,12 @@ export class QuizService {
   readonly baseUrl = 'https://opentdb.com';
 
 
+  /* SERVICE STATE */
+
+  private quizDataSubject$ = new BehaviorSubject<TriviaQuestion[] | null>(null);
+  quizData$ = this.quizDataSubject$.asObservable();
+
+
 
   /* RETRIEVING TRIVIA CATEGORIES */
 
@@ -29,9 +35,6 @@ export class QuizService {
 
 
   /* QUIZ GENERATION */
-
-  private quizDataSubject$ = new BehaviorSubject<TriviaQuestion[] | null>(null);
-  quizData$ = this.quizDataSubject$.asObservable();
 
   generateNewQuiz(categoryID: number, difficulty: string): Observable<TriviaQuestion[]> {
     return this.getQuestions(categoryID, difficulty).pipe(
@@ -88,6 +91,10 @@ export class QuizService {
       ).subscribe();
 
       if (updatedData) this.quizDataSubject$.next(updatedData);
+  }
+
+  emptyQuizData() {
+    this.quizDataSubject$.next(null);
   }
 
 

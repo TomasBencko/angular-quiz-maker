@@ -1,1 +1,9 @@
-<p>quiz-results-page works!</p>
+<h1>Results</h1>
+
+<app-question-list *ngIf="quizData$ | async"
+  [quizData$]="quizData$" [quizCompleted]="true"
+></app-question-list>
+
+<app-button-wide
+  (buttonClicked)="onNewButtonClicked()"
+>Create a new quiz</app-button-wide>

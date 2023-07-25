@@ -1,6 +1,8 @@
 
 <button [innerHTML]="option"
-  [class.correct]="isCorrect"
+  [class.correct]="isCorrect && quizCompleted"
+  [class.incorrect]="isSelected && !isCorrect && quizCompleted"
   [class.selected]="isSelected"
+  [class.isSelectable]="!quizCompleted"
   (click)="onClick()"
 ></button>

@@ -13,6 +13,7 @@ export class QuestionAnswerComponent {
   @Input() option = '';
   @Input() isCorrect = false;
   @Input() isSelected = false;
+  @Input() quizCompleted? = false;
 
   @Output() optionSelected = new EventEmitter<string>()
 

@@ -2,8 +2,7 @@
 
 <app-quiz-selection></app-quiz-selection>
 
-<app-question-list
-  *ngIf="quizData$ | async"
+<app-question-list *ngIf="quizData$ | async"
   [quizData$]="quizData$"
   (questionAnswered)="onQuestionAnswered($event)"
 ></app-question-list>

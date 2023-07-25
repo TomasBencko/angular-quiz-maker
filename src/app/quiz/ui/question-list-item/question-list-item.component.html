@@ -4,8 +4,9 @@
 <div class="question-answers">
   <app-question-answer *ngFor="let option of questionData.options"
     [option]="option"
-    [isCorrect]="option === questionData.correctAnswer && false"
+    [isCorrect]="option === questionData.correctAnswer"
     [isSelected]="option === questionData.selectedAnswer"
+    [quizCompleted]="quizCompleted"
     (optionSelected)="onOptionSelected($event)"
   ></app-question-answer>
 </div>

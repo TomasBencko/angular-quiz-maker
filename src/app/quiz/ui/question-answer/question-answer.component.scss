@@ -1,6 +1,5 @@
 
 button {
-  cursor: pointer;
   padding: var(--paddings);
   border: 1px solid green;
   border-radius: var(--radius);
@@ -15,9 +14,19 @@ button {
     color: white;
   }
 
-  &:hover {
-    // transform: scale(1.05);
-    background: rgba($color: green, $alpha: .6);
+  &.incorrect {
+    background: red;
+    border-color: red;
     color: white;
+  }
+
+  &.isSelectable {
+    cursor: pointer;
+
+    &:hover {
+      // transform: scale(1.05);
+      background: rgba($color: green, $alpha: .6);
+      color: white;
+    }
   }
 }

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { QuizService } from '@/quiz/services/quiz.service';
 import { QuizSelectionComponent } from './quiz-selection/quiz-selection.component';
@@ -21,7 +22,11 @@ import { QuestionAnswer, TriviaQuestion } from '@/quiz/models/quiz.interface';
 })
 export class QuizPageComponent {
 
-  constructor(private quizService: QuizService) {}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private quizService: QuizService
+  ) {}
 
   quizData$: Observable<TriviaQuestion[] | null> = this.quizService.quizData$;
 
@@ -37,6 +42,6 @@ export class QuizPageComponent {
   }
 
   onSubmitButtonClicked() {
-    console.log(`Submit button clicked`);
+    this.router.navigate(['results'], { relativeTo: this.activatedRoute });
   }
 }

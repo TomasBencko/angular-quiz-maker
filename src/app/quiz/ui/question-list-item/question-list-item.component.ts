@@ -14,6 +14,7 @@ export class QuestionListItemComponent {
 
   @Input() questionData!: TriviaQuestion;
   @Input() questionIndex!: number;
+  @Input() quizCompleted? = false;
 
   @Output() questionAnswerSelected = new EventEmitter<QuestionAnswer>()
 
