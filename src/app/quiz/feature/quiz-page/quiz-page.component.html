@@ -5,4 +5,10 @@
 <app-question-list
   *ngIf="quizData$ | async"
   [quizData$]="quizData$"
+  (questionAnswered)="onQuestionAnswered($event)"
 ></app-question-list>
+
+<!-- Submit button -->
+<app-button-wide *ngIf="quizCompleted$ | async"
+  (buttonClicked)="onSubmitButtonClicked()"
+>Submit</app-button-wide>

@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuestionListItemComponent } from '../question-list-item/question-list-item.component';
+import { QuestionAnswer } from '@/quiz/models/quiz.interface';
 
 @Component({
   selector: 'app-question-list',
@@ -13,4 +14,9 @@ export class QuestionListComponent {
 
   @Input() quizData$: any = null;
 
+  @Output() questionAnswered = new EventEmitter<QuestionAnswer>();
+
+  onQuestionAnswerSelected($event: QuestionAnswer) {
+    this.questionAnswered.emit($event);
+  }
 }

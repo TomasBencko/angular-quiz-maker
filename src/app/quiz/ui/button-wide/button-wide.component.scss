@@ -1,0 +1,16 @@
+
+button {
+  width: 100%;
+  padding: var(--paddings);
+  margin-top: calc(var(--paddings) * 2);
+  border-radius: var(--radius);
+  border: none;
+  background-color: gray;
+  color: white;
+  font-size: 1.15rem;
+  cursor: pointer;
+
+  &:hover {
+    opacity: .8;
+  }
+}

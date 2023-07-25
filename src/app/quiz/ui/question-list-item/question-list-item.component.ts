@@ -1,25 +1,28 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TriviaQuestion } from '@/quiz/models/quiz.interface';
+import { QuestionAnswer, TriviaQuestion } from '@/quiz/models/quiz.interface';
+import { QuestionAnswerComponent } from '../question-answer/question-answer.component';
 
 @Component({
   selector: 'app-question-list-item',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, QuestionAnswerComponent],
   templateUrl: './question-list-item.component.html',
   styleUrls: ['./question-list-item.component.scss']
 })
-export class QuestionListItemComponent implements OnInit {
+export class QuestionListItemComponent {
 
   @Input() questionData!: TriviaQuestion;
+  @Input() questionIndex!: number;
 
-  options: any = [];
+  @Output() questionAnswerSelected = new EventEmitter<QuestionAnswer>()
 
-  ngOnInit(): void {
-    this.options = [
-      this.questionData.correct_answer,
-      ...this.questionData.incorrect_answers
-    ].sort(() => Math.random() - 0.5);
+  onOptionSelected(option: string) {
+    if (option === this.questionData.selectedAnswer) {
+      this.questionAnswerSelected.emit({ index: this.questionIndex, option: null });
+
+    } else {
+      this.questionAnswerSelected.emit({ index: this.questionIndex, option });
+    }
   }
-
 }

@@ -8,12 +8,19 @@ export interface TriviaCategory {
   name: string;
 }
 
-export interface TriviaQuestions {
-  response_code?: number;
-  results: TriviaQuestion[];
+export interface TriviaQuestion {
+  readonly question: string;
+  readonly options: string[];
+  readonly correctAnswer: string;
+  selectedAnswer: string | null;
 }
 
-export interface TriviaQuestion {
+export interface TriviaQuestionsResponse {
+  response_code?: number;
+  results: TriviaQuestionResponse[];
+}
+
+export interface TriviaQuestionResponse {
   category: string;
   type: 'multiple';
   difficulty: DifficultyLevel;
@@ -23,3 +30,8 @@ export interface TriviaQuestion {
 }
 
 export type DifficultyLevel = 'easy' | 'medium' | 'hard';
+
+export interface QuestionAnswer {
+  index: number;
+  option: string | null;
+}

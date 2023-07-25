@@ -28,9 +28,13 @@ form {
     max-width: 20%;
     flex-grow: 1;
 
-    &:hover {
+    &:not([disabled]):hover {
       background-color: #BBBBBB;
       color: white;
+    }
+
+    &[disabled] {
+      cursor: not-allowed;
     }
   }
 }

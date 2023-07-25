@@ -19,7 +19,7 @@ export class QuizSelectionComponent {
   ) {}
 
   triviaCategoryOptions$ = this.quizService.getTriviaCategories()
-    .pipe( map(data => data?.trivia_categories) );
+    .pipe( map(data => data?.trivia_categories.sort(this.compare)) );
 
 
   quizSelectionForm = this.fb.group({
@@ -27,16 +27,19 @@ export class QuizSelectionComponent {
     difficultyLevel: ['', Validators.required]
   });
 
+
   onSubmit(): void {
+    if (!this.quizSelectionForm.valid) return;
 
-    if (!this.quizSelectionForm.valid) {
-      console.log('invalid form');
-      return;
-    }
-
-    console.log(this.quizSelectionForm)
     const categoryID = Number(this.quizSelectionForm.value.triviaCategory);
     const difficulty = this.quizSelectionForm.value.difficultyLevel!;
     this.quizService.generateNewQuiz(categoryID, difficulty).subscribe();
+  }
+
+
+  private compare(a: { name: string }, b: { name: string }) {
+    if (a.name > b.name) return 1;
+    else if (a.name < b.name) return -1;
+    else return 0;
   }
 }

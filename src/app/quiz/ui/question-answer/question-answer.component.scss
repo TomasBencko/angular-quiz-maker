@@ -1,0 +1,23 @@
+
+button {
+  cursor: pointer;
+  padding: var(--paddings);
+  border: 1px solid green;
+  border-radius: var(--radius);
+  background: none;
+
+  color: green;
+  white-space: nowrap;
+  transition: transform .2s;
+
+  &.selected, &.correct {
+    background: green;
+    color: white;
+  }
+
+  &:hover {
+    // transform: scale(1.05);
+    background: rgba($color: green, $alpha: .6);
+    color: white;
+  }
+}

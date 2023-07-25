@@ -1,8 +1,5 @@
 
-<app-question-list-item *ngFor="let question of quizData$ | async"
-  [questionData]="question"
+<app-question-list-item *ngFor="let question of quizData$ | async; index as i"
+  [questionData]="question" [questionIndex]="i"
+  (questionAnswerSelected)="onQuestionAnswerSelected($event)"
 ></app-question-list-item>
-
-
-
-<!-- <p>{{ quizData$ | async | json }}</p> -->

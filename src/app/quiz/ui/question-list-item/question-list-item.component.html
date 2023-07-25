@@ -2,5 +2,10 @@
 <p [innerHTML]="questionData.question" ></p>
 
 <div class="question-answers">
-  <button *ngFor="let option of options" [innerHTML]="option"></button>
+  <app-question-answer *ngFor="let option of questionData.options"
+    [option]="option"
+    [isCorrect]="option === questionData.correctAnswer && false"
+    [isSelected]="option === questionData.selectedAnswer"
+    (optionSelected)="onOptionSelected($event)"
+  ></app-question-answer>
 </div>
