@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuestionListItemComponent } from '../question-list-item/question-list-item.component';
-import { QuestionAnswer } from '@/quiz/models/quiz.interface';
+import { QuestionAnswer } from '@/models/quiz.interface';
 
 @Component({
   selector: 'app-question-list',

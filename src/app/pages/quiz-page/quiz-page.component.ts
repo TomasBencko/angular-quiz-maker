@@ -4,11 +4,11 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { QuizService } from '@/quiz/services/quiz.service';
+import { QuizService } from '@/core/quiz.service';
 import { QuizSelectionComponent } from './quiz-selection/quiz-selection.component';
-import { QuestionListComponent } from '@/quiz/ui/question-list/question-list.component';
-import { ButtonWideComponent } from '@/quiz/ui/button-wide/button-wide.component';
-import { QuestionAnswer, TriviaQuestion } from '@/quiz/models/quiz.interface';
+import { QuestionListComponent } from '@/shared/question-list/question-list.component';
+import { ButtonWideComponent } from '@/shared/button-wide/button-wide.component';
+import { QuestionAnswer, TriviaQuestion } from '@/models/quiz.interface';
 
 @Component({
   selector: 'app-quiz-page',

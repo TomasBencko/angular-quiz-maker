@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { QuestionAnswer, TriviaQuestion } from '@/quiz/models/quiz.interface';
+import { QuestionAnswer, TriviaQuestion } from '@/models/quiz.interface';
 import { QuestionAnswerComponent } from '../question-answer/question-answer.component';
 
 @Component({

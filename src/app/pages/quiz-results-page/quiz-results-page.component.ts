@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { QuizService } from '@/quiz/services/quiz.service';
-import { QuestionListComponent } from '@/quiz/ui/question-list/question-list.component';
-import { TriviaQuestion } from '@/quiz/models/quiz.interface';
-import { ButtonWideComponent } from '@/quiz/ui/button-wide/button-wide.component';
+import { QuizService } from '@/core/quiz.service';
+import { QuestionListComponent } from '@/shared/question-list/question-list.component';
+import { TriviaQuestion } from '@/models/quiz.interface';
+import { ButtonWideComponent } from '@/shared/button-wide/button-wide.component';
 import { Router } from '@angular/router';
-import { ScoreColorDirective } from '@/quiz/utils/score-color.directive';
+import { ScoreColorDirective } from '@/shared/score-color.directive';
 
 @Component({
   selector: 'app-quiz-results-page',

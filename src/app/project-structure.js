@@ -1,0 +1,68 @@
+
+/src/
+  /app/
+    /core/
+      quiz.service.ts
+    /models/
+      quiz.interface.ts
+    /pages/
+      /quiz-page/
+        quiz-page.component.html|ts|scss
+        /quiz-selection/
+          quiz-selection.component.html|ts|scss
+      /quiz-results-page/
+        quiz-results-page.component.html|ts|scss
+    /shared/
+      /button-wide/
+        button-wide.component.html|ts|scss
+      /question-answer/
+        question-answer.component.html|ts|scss
+      /question-list/
+        question-list.component.html|ts|scss
+      /question-list-item/
+        question-list-item.component.html|ts|scss
+      score-color.directive.ts
+    app.component.html|ts|scss
+    app.config.ts
+    app.routes.ts
+  /assets/
+  favicon.ico
+  index.html
+  main.ts
+  styles.scss
+
+
+
+/src/
+  /app/
+    /quiz/
+      /feature/
+        /quiz-page/
+          quiz-page.component.html|ts|scss
+          /quiz-selection/
+            quiz-selection.component.html|ts|scss
+        /quiz-results-page/
+          quiz-results-page.component.html|ts|scss
+      /models/
+        quiz.interface.ts
+      /services/
+        quiz.service.ts
+      /ui/
+        /button-wide/
+          button-wide.component.html|ts|scss
+        /question-answer/
+          question-answer.component.html|ts|scss
+        /question-list/
+          question-list.component.html|ts|scss
+        /question-list-item/
+          question-list-item.component.html|ts|scss
+      /utils/
+        score-color.directive.ts
+    app.component.html|ts|scss
+    app.config.ts
+    app.routes.ts
+  /assets/
+  favicon.ico
+  index.html
+  main.ts
+  styles.scss

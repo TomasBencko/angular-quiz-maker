@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { QuizService } from '@/quiz/services/quiz.service';
+import { QuizService } from '@/core/quiz.service';
 import { map } from 'rxjs/operators'
 
 @Component({
