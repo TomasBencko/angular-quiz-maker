@@ -1,5 +1,5 @@
 
-export interface TriviaCategories {
+export interface TriviaCategoriesResponse {
   trivia_categories: TriviaCategory[];
 }
 
@@ -8,14 +8,7 @@ export interface TriviaCategory {
   name: string;
 }
 
-export interface TriviaQuestion {
-  readonly question: string;
-  readonly options: string[];
-  readonly correctAnswer: string;
-  selectedAnswer: string | null;
-}
-
-export interface TriviaQuestionsResponse {
+export interface TriviaQuestionListResponse {
   response_code?: number;
   results: TriviaQuestionResponse[];
 }
@@ -30,8 +23,3 @@ export interface TriviaQuestionResponse {
 }
 
 export type DifficultyLevel = 'easy' | 'medium' | 'hard';
-
-export interface QuestionAnswer {
-  index: number;
-  option: string | null;
-}

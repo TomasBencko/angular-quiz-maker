@@ -8,7 +8,7 @@ import { QuizService } from '@/core/quiz.service';
 import { QuizSelectionComponent } from './quiz-selection/quiz-selection.component';
 import { QuestionListComponent } from '@/shared/question-list/question-list.component';
 import { ButtonWideComponent } from '@/shared/button-wide/button-wide.component';
-import { QuestionAnswer, TriviaQuestion } from '@/models/quiz.interface';
+import { QuestionAnswer, TriviaQuestion } from '@/models/app.models';
 
 @Component({
   selector: 'app-quiz-page',

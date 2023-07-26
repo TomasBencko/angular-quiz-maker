@@ -3,7 +3,8 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { retry, catchError, map, tap } from 'rxjs/operators';
 
-import { TriviaCategories, TriviaQuestion, TriviaQuestionsResponse, TriviaQuestionResponse } from '../models/quiz.interface';
+import { TriviaCategoriesResponse, TriviaQuestionListResponse, TriviaQuestionResponse } from '@/models/api.models';
+import { TriviaQuestion } from '@/models/app.models';
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +25,11 @@ export class QuizService {
 
   /* RETRIEVING TRIVIA CATEGORIES */
 
-  getTriviaCategories(): Observable<TriviaCategories> {
-    return this.http.get<TriviaCategories>(`${this.baseUrl}/api_category.php`)
+  getTriviaCategories(): Observable<TriviaCategoriesResponse> {
+    return this.http.get<TriviaCategoriesResponse>(`${this.baseUrl}/api_category.php`)
       .pipe(
         retry(3),
-        catchError(this.handleError('getTriviaCategories', {} as TriviaCategories))
+        catchError(this.handleError('getTriviaCategories', {} as TriviaCategoriesResponse))
       );
   }
 
@@ -43,7 +44,7 @@ export class QuizService {
     );
   }
 
-  private createQuizFromResponse(response: TriviaQuestionsResponse): TriviaQuestion[] {
+  private createQuizFromResponse(response: TriviaQuestionListResponse): TriviaQuestion[] {
     return response.results.map((question: TriviaQuestionResponse) => {
       return {
         question: question.question,
@@ -57,7 +58,7 @@ export class QuizService {
     })
   }
 
-  private getQuestions(categoryID: number, difficulty: string): Observable<TriviaQuestionsResponse> {
+  private getQuestions(categoryID: number, difficulty: string): Observable<TriviaQuestionListResponse> {
     const options = {
       params: new HttpParams().appendAll({
         amount: 5,
@@ -67,10 +68,10 @@ export class QuizService {
       })
     };
 
-    return this.http.get<TriviaQuestionsResponse>(`${this.baseUrl}/api.php`, options)
+    return this.http.get<TriviaQuestionListResponse>(`${this.baseUrl}/api.php`, options)
       .pipe(
         retry(3),
-        catchError(this.handleError('getQuestions', {} as TriviaQuestionsResponse))
+        catchError(this.handleError('getQuestions', {} as TriviaQuestionListResponse))
       );
   }
 

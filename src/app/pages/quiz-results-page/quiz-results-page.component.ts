@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { QuizService } from '@/core/quiz.service';
 import { QuestionListComponent } from '@/shared/question-list/question-list.component';
-import { TriviaQuestion } from '@/models/quiz.interface';
+import { TriviaQuestion } from '@/models/app.models';
 import { ButtonWideComponent } from '@/shared/button-wide/button-wide.component';
 import { Router } from '@angular/router';
 import { ScoreColorDirective } from '@/shared/score-color.directive';
@@ -40,10 +40,8 @@ export class QuizResultsPageComponent {
   successRate$: Observable<number | null> = combineLatest(
     [this.correctAnswers$, this.numberOfQuestions$]
   ).pipe(
-    map((([correctAnswers, numberOfQuestions]: any[]) => { // TODO:
-      console.log(`correctAnswers / numberOfQuestions`)
-      console.log(correctAnswers / numberOfQuestions)
-      return correctAnswers / numberOfQuestions
+    map((([correctAnswers, numberOfQuestions]: [number | null, number | null]) => {
+      return correctAnswers && numberOfQuestions ? correctAnswers / numberOfQuestions : 0;
     }))
   )
 
