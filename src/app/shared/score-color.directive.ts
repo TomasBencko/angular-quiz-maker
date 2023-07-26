@@ -8,7 +8,7 @@ export class ScoreColorDirective implements OnChanges {
 
   @Input() appScoreColor: number | null = null;
 
-  constructor(private el: ElementRef) { }
+  constructor(private el: ElementRef) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     const successRate = changes['appScoreColor']?.currentValue;

@@ -10,3 +10,8 @@ export interface QuestionAnswer {
   index: number;
   option: string | null;
 }
+
+export interface TriviaCategory {
+  id: number;
+  name: string;
+}

@@ -18,8 +18,7 @@ export class QuizSelectionComponent {
     private quizService: QuizService
   ) {}
 
-  triviaCategoryOptions$ = this.quizService.getTriviaCategories()
-    .pipe( map(data => data?.trivia_categories.sort(this.compare)) );
+  triviaCategoryOptions$ = this.quizService.getTriviaCategories();
 
 
   quizSelectionForm = this.fb.group({
@@ -34,12 +33,5 @@ export class QuizSelectionComponent {
     const categoryID = Number(this.quizSelectionForm.value.triviaCategory);
     const difficulty = this.quizSelectionForm.value.difficultyLevel!;
     this.quizService.generateNewQuiz(categoryID, difficulty).subscribe();
-  }
-
-
-  private compare(a: { name: string }, b: { name: string }) {
-    if (a.name > b.name) return 1;
-    else if (a.name < b.name) return -1;
-    else return 0;
   }
 }

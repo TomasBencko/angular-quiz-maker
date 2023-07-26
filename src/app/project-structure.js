@@ -2,9 +2,11 @@
 /src/
   /app/
     /core/
+      error-handler.service.ts
       quiz.service.ts
     /models/
-      quiz.interface.ts
+      api.interface.ts
+      app.interface.ts
     /pages/
       /quiz-page/
         quiz-page.component.html|ts|scss
@@ -22,6 +24,8 @@
       /question-list-item/
         question-list-item.component.html|ts|scss
       score-color.directive.ts
+    /utils/
+      sort.utils.ts
     app.component.html|ts|scss
     app.config.ts
     app.routes.ts

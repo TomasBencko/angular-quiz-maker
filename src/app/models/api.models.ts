@@ -1,11 +1,7 @@
+import { TriviaCategory } from "./app.models";
 
 export interface TriviaCategoriesResponse {
   trivia_categories: TriviaCategory[];
-}
-
-export interface TriviaCategory {
-  id: number;
-  name: string;
 }
 
 export interface TriviaQuestionListResponse {

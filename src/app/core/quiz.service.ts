@@ -1,19 +1,28 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { retry, catchError, map, tap } from 'rxjs/operators';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
+import { environment } from 'src/environments/environment';
+import { ErrorHandlerService } from './error-handler.service';
 import { TriviaCategoriesResponse, TriviaQuestionListResponse, TriviaQuestionResponse } from '@/models/api.models';
-import { TriviaQuestion } from '@/models/app.models';
+import { TriviaQuestion, TriviaCategory } from '@/models/app.models';
+import { compareByName, shuffle } from '@/utils/sort.utils';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuizService {
 
-  constructor(private http: HttpClient) {}
+  readonly baseUrl = environment.apiUrl;
+  private readonly numberOfQuestionsToFetch = 5;
 
-  readonly baseUrl = 'https://opentdb.com';
+  constructor(
+    private http: HttpClient,
+    private errorHandlerService: ErrorHandlerService
+  ) {}
+
 
 
   /* SERVICE STATE */
@@ -25,12 +34,11 @@ export class QuizService {
 
   /* RETRIEVING TRIVIA CATEGORIES */
 
-  getTriviaCategories(): Observable<TriviaCategoriesResponse> {
-    return this.http.get<TriviaCategoriesResponse>(`${this.baseUrl}/api_category.php`)
-      .pipe(
-        retry(3),
-        catchError(this.handleError('getTriviaCategories', {} as TriviaCategoriesResponse))
-      );
+  getTriviaCategories(): Observable<TriviaCategory[]> {
+    return this.http.get<TriviaCategoriesResponse>(`${this.baseUrl}/api_category.php`).pipe(
+      catchError(this.errorHandlerService.handleError('getTriviaCategories', {} as TriviaCategoriesResponse)),
+      map(data => [...data.trivia_categories].sort(compareByName))
+    );
   }
 
 
@@ -48,65 +56,43 @@ export class QuizService {
     return response.results.map((question: TriviaQuestionResponse) => {
       return {
         question: question.question,
-        options: [ // Shuffle correct answer with incorrect ones
-          question.correct_answer,
-          ...question.incorrect_answers
-        ].sort(() => Math.random() - 0.5),
+        options: shuffle([ ...question.incorrect_answers, question.correct_answer ]),
         correctAnswer: question.correct_answer,
         selectedAnswer: null
       }
-    })
+    });
   }
 
   private getQuestions(categoryID: number, difficulty: string): Observable<TriviaQuestionListResponse> {
     const options = {
       params: new HttpParams().appendAll({
-        amount: 5,
+        amount: this.numberOfQuestionsToFetch,
         category: categoryID,
         difficulty: difficulty,
         type: 'multiple'
       })
     };
 
-    return this.http.get<TriviaQuestionListResponse>(`${this.baseUrl}/api.php`, options)
-      .pipe(
-        retry(3),
-        catchError(this.handleError('getQuestions', {} as TriviaQuestionListResponse))
-      );
+    return this.http.get<TriviaQuestionListResponse>(`${this.baseUrl}/api.php`, options).pipe(
+      catchError(this.errorHandlerService.handleError('getQuestions', {} as TriviaQuestionListResponse))
+    );
   }
+
 
 
   /* QUIZ CONTROL */
 
   updateSelectedAnswer(questionIndex: number, selectedAnswer: string | null) {
-
-    let updatedData: TriviaQuestion[] | undefined;
-
-    this.quizData$.pipe(
-      map((data: TriviaQuestion[] | null) => {
-        updatedData = data?.map((question, index) => {
-          if (questionIndex !== index) return question;
-          else return { ...question, selectedAnswer: selectedAnswer };
-        })
-      })
-      ).subscribe();
-
-      if (updatedData) this.quizDataSubject$.next(updatedData);
+    this.quizDataSubject$.next(
+      this.quizDataSubject$.getValue()?.map((questionData, index) => {
+        return questionIndex === index
+          ? { ...questionData, selectedAnswer: selectedAnswer }
+          : questionData;
+      }) || null
+    );
   }
 
   emptyQuizData() {
     this.quizDataSubject$.next(null);
-  }
-
-
-
-  /* ERROR HANDLER */
-
-  private handleError<T>(operation = '', result?: T) {
-    return (error: HttpErrorResponse): Observable<T> => {
-      console.error(`⚠️ Operation '${operation}' has failed!`);
-      console.error(error);
-      return of(result as T);
-    }
   }
 }
