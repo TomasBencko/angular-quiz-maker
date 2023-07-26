@@ -1,4 +1,4 @@
-import { TriviaCategory } from "./app.models";
+import { DifficultyLevel, TriviaCategory } from "./app.models";
 
 export interface TriviaCategoriesResponse {
   trivia_categories: TriviaCategory[];
@@ -17,5 +17,3 @@ export interface TriviaQuestionResponse {
   correct_answer: string;
   incorrect_answers: string[];
 }
-
-export type DifficultyLevel = 'easy' | 'medium' | 'hard';

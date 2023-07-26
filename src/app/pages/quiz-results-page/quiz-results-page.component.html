@@ -1,3 +1,4 @@
+
 <h1>Results</h1>
 
 <app-question-list *ngIf="quizData$ | async"
@@ -11,7 +12,6 @@
 <ng-template #noScore>
   <p class="score">No score to show</p>
 </ng-template>
-
 
 <app-button-wide
   (buttonClicked)="onNewButtonClicked()"

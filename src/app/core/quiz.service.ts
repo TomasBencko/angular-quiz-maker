@@ -6,7 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ErrorHandlerService } from './error-handler.service';
 import { TriviaCategoriesResponse, TriviaQuestionListResponse, TriviaQuestionResponse } from '@/models/api.models';
-import { TriviaQuestion, TriviaCategory } from '@/models/app.models';
+import { TriviaQuestion, TriviaCategory, DifficultyLevel } from '@/models/app.models';
 import { compareByName, shuffle } from '@/utils/sort.utils';
 
 
@@ -45,7 +45,7 @@ export class QuizService {
 
   /* QUIZ GENERATION */
 
-  generateNewQuiz(categoryID: number, difficulty: string): Observable<TriviaQuestion[]> {
+  generateNewQuiz(categoryID: number, difficulty: DifficultyLevel): Observable<TriviaQuestion[]> {
     return this.getQuestions(categoryID, difficulty).pipe(
       map(data => this.createQuizFromResponse(data)),
       tap(data => this.quizDataSubject$.next(data))
@@ -63,7 +63,7 @@ export class QuizService {
     });
   }
 
-  private getQuestions(categoryID: number, difficulty: string): Observable<TriviaQuestionListResponse> {
+  private getQuestions(categoryID: number, difficulty: DifficultyLevel): Observable<TriviaQuestionListResponse> {
     const options = {
       params: new HttpParams().appendAll({
         amount: this.numberOfQuestionsToFetch,

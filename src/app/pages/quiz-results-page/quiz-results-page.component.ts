@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { QuizService } from '@/core/quiz.service';
 import { QuestionListComponent } from '@/shared/question-list/question-list.component';
-import { TriviaQuestion } from '@/models/app.models';
 import { ButtonWideComponent } from '@/shared/button-wide/button-wide.component';
-import { Router } from '@angular/router';
 import { ScoreColorDirective } from '@/shared/score-color.directive';
+import { TriviaQuestion } from '@/models/app.models';
 
 @Component({
   selector: 'app-quiz-results-page',
@@ -28,7 +28,7 @@ export class QuizResultsPageComponent {
 
   correctAnswers$: Observable<number | null> = this.quizData$.pipe(
     map(data => data
-      ? data.reduce((acc, question) => question.selectedAnswer === question.correctAnswer ? ++acc : acc, 0)
+      ? data.reduce((acc, question) => question.selectedAnswer === question.correctAnswer ? acc + 1 : acc, 0)
       : null
     )
   )
@@ -44,6 +44,7 @@ export class QuizResultsPageComponent {
       return correctAnswers && numberOfQuestions ? correctAnswers / numberOfQuestions : 0;
     }))
   )
+
 
   onNewButtonClicked() {
     this.quizService.emptyQuizData();

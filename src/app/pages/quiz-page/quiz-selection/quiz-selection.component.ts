@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule, Validators, FormControl, FormGroup } from '@angular/forms';
+
 import { QuizService } from '@/core/quiz.service';
-import { map } from 'rxjs/operators'
+import { DifficultyLevel, QuizSelectionForm } from '@/models/app.models';
 
 @Component({
   selector: 'app-quiz-selection',
@@ -13,17 +14,19 @@ import { map } from 'rxjs/operators'
 })
 export class QuizSelectionComponent {
 
-  constructor(
-    private fb: FormBuilder,
-    private quizService: QuizService
-  ) {}
+  constructor(private quizService: QuizService) {}
 
   triviaCategoryOptions$ = this.quizService.getTriviaCategories();
 
+  difficultyOptions = [
+    { value: 'easy', label: 'Easy' },
+    { value: 'medium', label: 'Medium' },
+    { value: 'hard', label: 'Hard' }
+  ]
 
-  quizSelectionForm = this.fb.group({
-    triviaCategory: ['', Validators.required],
-    difficultyLevel: ['', Validators.required]
+  quizSelectionForm = new FormGroup<QuizSelectionForm>({
+    triviaCategory: new FormControl('', Validators.required),
+    difficultyLevel: new FormControl('', Validators.required)
   });
 
 
@@ -31,7 +34,7 @@ export class QuizSelectionComponent {
     if (!this.quizSelectionForm.valid) return;
 
     const categoryID = Number(this.quizSelectionForm.value.triviaCategory);
-    const difficulty = this.quizSelectionForm.value.difficultyLevel!;
+    const difficulty: DifficultyLevel = this.quizSelectionForm.value.difficultyLevel as DifficultyLevel;
     this.quizService.generateNewQuiz(categoryID, difficulty).subscribe();
   }
 }

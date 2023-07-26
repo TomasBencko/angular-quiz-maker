@@ -15,7 +15,7 @@ export class QuestionAnswerComponent {
   @Input() isSelected = false;
   @Input() quizCompleted? = false;
 
-  @Output() optionSelected = new EventEmitter<string>()
+  @Output() optionSelected = new EventEmitter<string>();
 
 
   onClick() {

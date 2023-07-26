@@ -12,8 +12,8 @@ export class ButtonWideComponent {
 
   @Output() buttonClicked = new EventEmitter();
 
+
   onClick() {
     this.buttonClicked.emit();
   }
-
 }

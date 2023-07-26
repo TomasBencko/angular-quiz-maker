@@ -1,7 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { QuestionAnswer, TriviaQuestion } from '@/models/app.models';
+
 import { QuestionAnswerComponent } from '../question-answer/question-answer.component';
+import { QuestionAnswer, TriviaQuestion } from '@/models/app.models';
 
 @Component({
   selector: 'app-question-list-item',
@@ -17,6 +18,7 @@ export class QuestionListItemComponent {
   @Input() quizCompleted? = false;
 
   @Output() questionAnswerSelected = new EventEmitter<QuestionAnswer>()
+
 
   onOptionSelected(option: string) {
     if (option === this.questionData.selectedAnswer) {

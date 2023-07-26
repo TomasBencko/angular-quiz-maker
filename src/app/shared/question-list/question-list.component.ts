@@ -1,8 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
+
 import { QuestionListItemComponent } from '../question-list-item/question-list-item.component';
 import { QuestionAnswer, TriviaQuestion } from '@/models/app.models';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-question-list',
@@ -17,6 +18,7 @@ export class QuestionListComponent {
   @Input() quizCompleted? = false;
 
   @Output() questionAnswered = new EventEmitter<QuestionAnswer>();
+
 
   onQuestionAnswerSelected($event: QuestionAnswer) {
     this.questionAnswered.emit($event);

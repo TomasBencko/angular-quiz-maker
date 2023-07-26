@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Router, ActivatedRoute } from '@angular/router';
 
 import { QuizService } from '@/core/quiz.service';
 import { QuizSelectionComponent } from './quiz-selection/quiz-selection.component';
@@ -13,10 +13,7 @@ import { QuestionAnswer, TriviaQuestion } from '@/models/app.models';
 @Component({
   selector: 'app-quiz-page',
   standalone: true,
-  imports: [
-    CommonModule, QuizSelectionComponent, QuestionListComponent,
-    ButtonWideComponent
-  ],
+  imports: [CommonModule, QuizSelectionComponent, QuestionListComponent, ButtonWideComponent],
   templateUrl: './quiz-page.component.html',
   styleUrls: ['./quiz-page.component.scss']
 })
@@ -31,11 +28,11 @@ export class QuizPageComponent {
   quizData$: Observable<TriviaQuestion[] | null> = this.quizService.quizData$;
 
   quizCompleted$ = this.quizData$.pipe(
-      map((data: TriviaQuestion[] | null) => {
-        if (!data) return false;
-        else return data.every(i => i.selectedAnswer !== null);
-      })
+    map((data: TriviaQuestion[] | null) => {
+      return data ? data.every(i => i.selectedAnswer !== null) : false;
+    })
   );
+
 
   onQuestionAnswered($event: QuestionAnswer) {
     this.quizService.updateSelectedAnswer($event.index, $event.option);

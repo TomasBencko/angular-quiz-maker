@@ -1,5 +1,6 @@
 
 <app-question-list-item *ngFor="let question of quizData$ | async; index as i"
-  [questionData]="question" [questionIndex]="i" [quizCompleted]="quizCompleted"
+  [questionData]="question" [questionIndex]="i"
+  [quizCompleted]="quizCompleted"
   (questionAnswerSelected)="onQuestionAnswerSelected($event)"
 ></app-question-list-item>
