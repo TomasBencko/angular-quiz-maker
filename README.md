@@ -1,27 +1,56 @@
-# AngularQuizMaker
+# Angular Quiz Maker
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.5.
+- Single page trivia application created as an assignment project for [Level 2 Angular Certification](https://angulartraining.com/).
+- This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.5.
+- You can access live version of the app on [tomasbencko.github.io/angular-quiz-maker/](https://tomasbencko.github.io/angular-quiz-maker/).
+- *Feedback is highly appreciated!*
 
-## Development server
+## Project Setup
+1. Install necessary packages using `npm install`.
+2. Use `ng serve --open` to run the project locally.
+3. Use `ng build --configuration=production` to build the project for production.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Workspace Structure
+```JS
+/src/
+  /app/
+    /core/
+      error-handler.service.ts
+      quiz.service.ts
+    /models/
+      api.models.ts
+      app.models.ts
+    /pages/
+      /quiz-page/
+        /quiz-selection/
+          quiz-selection.component.html|ts|scss
+        quiz-page.component.html|ts|scss
+      /quiz-results-page/
+        quiz-results-page.component.html|ts|scss
+    /shared/
+      /button-wide/
+        button-wide.component.html|ts|scss
+      /question-list/
+        question-list.component.html|ts|scss
+      /question-list-item/
+        question-list-item.component.html|ts|scss
+      /question-answer/
+        question-answer.component.html|ts|scss
+      score-color.directive.ts
+    /utils/
+      sort.utils.ts
+    app.component.html|ts|scss
+    app.config.ts
+    app.routes.ts
+  /assets/
+  /environments/
+    environment.development.ts
+    environment.ts
+  favicon.ico
+  index.html
+  main.ts
+  styles.scss
+```
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Known Issues
+- Refreshing a page will throw 404. This is a known issue of GitHub Pages, since it doesn't support front-end routes properly, unlike Netlify for example. To access the page, it's necessary to use the base URL: [https://tomasbencko.github.io/angular-quiz-maker/](https://tomasbencko.github.io/angular-quiz-maker/).
